@@ -1,10 +1,8 @@
-# ie8png.js
-
 ![ie8png.js](./ie8pngjs-logo.png) 
 
 Fixes rendering of PNG images with transparency on modern-browsers. Works on latest Chrome, Firefox, Safari and IE9+.
 
-# Usage
+## Usage
 
 ```
 <script src="path/to/ie8png.js"></script>
@@ -18,11 +16,11 @@ Fixes rendering of PNG images with transparency on modern-browsers. Works on lat
 </script>
 ```
 
-# Dependencies
+## Dependencies
 
 [Vanilla JS][].
 
-# LICENSE
+## LICENSE
 
 MIT.
 
