@@ -47,6 +47,7 @@
     function copy(attr) {
       dest.setAttribute(attr, src.getAttribute(attr));
     }
+    copy("id");
     copy("class");
     copy("style");
   }

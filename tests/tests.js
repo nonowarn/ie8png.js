@@ -109,4 +109,25 @@
     }, 42);
   });
   */
+
+  QUnit.asyncTest("it copies some attributes to replacing elements", function (assert) {
+    expect(4);
+
+    var fixture = getFixture(),
+        imageEls = prepareImages(["test.png"]);
+
+    imageEls[0].setAttribute("id", "eric");
+    imageEls[0].setAttribute("class", "duke miles");
+    imageEls[0].setAttribute("style", "opacity: 0.6; width: 100%");
+
+    ie8png(imageEls[0]);
+
+    setTimeout(function () {
+      assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "replaces png image");
+      assert.strictEqual(fixture.childNodes[0].getAttribute("id"), "eric");
+      assert.strictEqual(fixture.childNodes[0].getAttribute("class"), "duke miles");
+      assert.strictEqual(fixture.childNodes[0].getAttribute("style"), "opacity: 0.6; width: 100%");
+      QUnit.start();
+    }, 42);
+  });
 })();
