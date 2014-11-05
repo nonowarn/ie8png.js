@@ -2,7 +2,7 @@
   "use strict";
 
   function prepareImages(sources) {
-    var fixture = document.getElementById("qunit-fixture"),
+    var fixture = getFixture(),
         i,
         l,
         img,
@@ -16,6 +16,10 @@
     }
 
     return imgs;
+  }
+
+  function getFixture() {
+    return document.getElementById("qunit-fixture");
   }
 
   QUnit.module("ie8png.js");
@@ -34,6 +38,24 @@
 
     setTimeout(function () {
       assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "replaces the image with canvas");
+      QUnit.start();
+    }, 42);
+  });
+
+  QUnit.asyncTest("it can fix NodeList", function (assert) {
+    expect(3);
+
+    var fixture = getFixture();
+
+    prepareImages(["test.png", "test.png", "test.png"]);
+
+    ie8png(fixture.querySelectorAll("img"));
+
+    setTimeout(function () {
+      var i, l;
+      for (i = 0, l = 3; i < l; ++i) {
+        assert.strictEqual(fixture.childNodes[i].tagName, "CANVAS", "replace an image in the NodeList");
+      }
       QUnit.start();
     }, 42);
   });

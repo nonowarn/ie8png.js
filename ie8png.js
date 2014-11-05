@@ -55,15 +55,14 @@
     copy("style");
   }
 
-  function ie8png(el) {
-    // IE8 or below don't need this
-    if (/; MSIE (?!9|\d{2,})/.test(navigator.userAgent)) {
-      return;
-    }
+  function toArray(els) {
+    return "length" in els ? Array.prototype.slice.apply(els) : [els];
+  }
 
+  function doFix(el) {
     // TODO: Handle load event and cache
     if (!loaded(el)) {
-      setTimeout(function () { ie8png(el); }, 20, el);
+      setTimeout(function () { doFix(el); }, 20);
       return;
     }
 
@@ -71,6 +70,21 @@
     copyAttributes(el, canvas);
 
     el.parentNode.replaceChild(canvas, el);
+  }
+
+  function ie8png(els) {
+    // IE8 or below don't need this
+    if (/; MSIE (?!9|\d{2,})/.test(navigator.userAgent)) {
+      return;
+    }
+
+    var i, l;
+
+    els = toArray(els);
+
+    for (i = 0, l = els.length; i < l; ++i) {
+      doFix(els[i]);
+    }
   }
 
   win.ie8png = ie8png;
