@@ -142,7 +142,7 @@
     expect(1);
 
     var fixture = getFixture(),
-        imageEls = prepareImages([location.origin+"/tests/test.png"]);
+        imageEls = prepareImages([location.protocol + "//" + location.host + "/tests/test.png"]);
 
     ie8png(imageEls[0], function () {
       assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "should replace <img> with explicit orign of the document");
