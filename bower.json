@@ -1,0 +1,24 @@
+{
+  "name": "ie8png.js",
+  "main": "ie8png.js",
+  "version": "0.0.0",
+  "authors": [
+    "nonowarn <nonowarn@gmail.com>"
+  ],
+  "description": "Fixing wrong behavior on transparent png images with opacity",
+  "keywords": [
+    "ie8",
+    "png",
+    "opacity",
+    "bug"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nonowarn/ie8png.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
