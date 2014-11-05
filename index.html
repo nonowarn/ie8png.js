@@ -3,9 +3,99 @@
   <head>
     <meta charset="utf-8" />
     <title>ie8png.js</title>
+    <style>
+      * {
+        font-family: monospace;
+      }
+
+      h1, .compare {
+        text-align: center;
+      }
+
+      .compare {
+        white-space: nowrap;
+        overflow: auto;
+      }
+    </style>
   </head>
   <body>
-    <h1>ie8png.js</h1>
-    
+
+    <h1>
+      <a href="//github.com/nonowarn/ie8png.js"><img data-ie8 src="./images/ie8pngjs.png"></a>
+    </h1>
+
+    <div class="compare">
+      <img src="./images/google.png">
+      <img data-ie8 src="./images/google.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/facebook.png">
+      <img data-ie8 src="./images/facebook.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/reddit.png">
+      <img data-ie8 src="./images/reddit.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/pinterest.png">
+      <img data-ie8 src="./images/pinterest.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/vimeo1.png">
+      <img data-ie8 src="./images/vimeo1.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/vimeo2.png">
+      <img data-ie8 src="./images/vimeo2.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/ebay1.png">
+      <img data-ie8 src="./images/ebay1.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/ebay2.png">
+      <img data-ie8 src="./images/ebay2.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/youtube.png">
+      <img data-ie8 src="./images/youtube.png">
+    </div>
+
+    <div class="compare">
+      <img src="./images/yelp.png">
+      <img data-ie8 src="./images/yelp.png">
+    </div>
+
+    <!-- Fork me Badge -->
+    <a href="https://github.com/nonowarn/ie8png.js"><img data-ie8 style="position: absolute; top: 0; right: 0; border: 0;" src="./images/forkme.png" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <div id="stat">
+    </div>
+
+    <script src="./ie8png.js"></script>
+    <script class="example">
+      (function () {
+        var startTime = +new Date(),
+            toProcess = document.querySelectorAll("[data-ie8]");
+        ie8png(toProcess, function () {
+           var endTime = +new Date(),
+               ellapsed = endTime - startTime,
+               processedPixels = [].reduce.call(toProcess, function (pixels, image) {
+                                   return pixels + (image.width * image.height);
+                                 }, 0);
+
+           document.getElementById("stat").innerText =
+             processedPixels + " pixels processed in " + ellapsed + "ms (" + (processedPixels / ellapsed).toFixed(2) + "px/ms)";
+        });
+      })();
+    </script>
   </body>
 </html>
