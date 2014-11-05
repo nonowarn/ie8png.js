@@ -105,20 +105,25 @@
   */
 
   QUnit.asyncTest("copies some attributes to replacing elements", function (assert) {
-    expect(4);
+    expect(5);
 
     var fixture = getFixture(),
         imageEls = prepareImages(["test.png"]);
 
     imageEls[0].setAttribute("id", "eric");
     imageEls[0].setAttribute("class", "duke miles");
-    imageEls[0].setAttribute("style", "opacity: 0.6; width: 100%");
+    imageEls[0].setAttribute("style", "height: 70px; width: 100%");
 
     ie8png(imageEls[0], function () {
+      var style = fixture.childNodes[0].getAttribute("style");
+
       assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "replaces png image");
       assert.strictEqual(fixture.childNodes[0].getAttribute("id"), "eric");
       assert.strictEqual(fixture.childNodes[0].getAttribute("class"), "duke miles");
-      assert.strictEqual(fixture.childNodes[0].getAttribute("style"), "opacity: 0.6; width: 100%");
+
+      assert.ok(/width: 100%/.test(style),  "copies style attribute");
+      assert.ok(/height: 70px/.test(style), "copies style attribute");
+
       QUnit.start();
     });
   });
