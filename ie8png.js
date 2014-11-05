@@ -56,10 +56,10 @@
     return "length" in els ? Array.prototype.slice.apply(els) : [els];
   }
 
-  function doFix(el) {
+  function doFix(el, onFinished) {
     // TODO: Handle load event and cache
     if (!loaded(el)) {
-      setTimeout(function () { doFix(el); }, 20);
+      setTimeout(function () { doFix(el, onFinished); }, 20);
       return;
     }
 
@@ -67,13 +67,31 @@
     copyAttributes(el, canvas);
 
     el.parentNode.replaceChild(canvas, el);
+
+    onFinished();
   }
 
   function shouldFix(el) {
     return /\.png/i.test(el.src);
   }
 
-  function ie8png(els) {
+  function nop() {}
+
+  function doAfterTimesCalled(fn, times) {
+    if (times === 0) {
+      fn();
+      return nop;
+    }
+
+    return function () {
+      times -= 1;
+      if (times === 0) {
+        fn();
+      }
+    };
+  }
+
+  function ie8png(els, onFinished) {
     // IE8 or below don't need this
     if (/; MSIE (?!9|\d{2,})/.test(navigator.userAgent)) {
       return;
@@ -81,12 +99,13 @@
 
     var i, l;
 
-    els = toArray(els);
+    els = toArray(els).filter(shouldFix);
+
+    onFinished = typeof onFinished === "function" ? onFinished : nop;
+    onFinished = doAfterTimesCalled(onFinished, els.length);
 
     for (i = 0, l = els.length; i < l; ++i) {
-      if (shouldFix(els[i])) {
-        doFix(els[i]);
-      }
+      doFix(els[i], onFinished);
     }
   }
 
