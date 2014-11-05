@@ -29,7 +29,7 @@
     assert.strictEqual(typeof ie8png, "function", "defines ie8png function globally");
   });
 
-  QUnit.asyncTest("it can fix a single png image", function (assert) {
+  QUnit.asyncTest("can fix a single png image", function (assert) {
     expect(1);
 
     var fixture = document.getElementById("qunit-fixture"),
@@ -43,7 +43,7 @@
     }, 42);
   });
 
-  QUnit.asyncTest("it can fix NodeList", function (assert) {
+  QUnit.asyncTest("can fix NodeList", function (assert) {
     expect(3);
 
     var fixture = getFixture();
@@ -61,7 +61,7 @@
     }, 42);
   });
 
-  QUnit.asyncTest("it should skip non-png iamges", function (assert) {
+  QUnit.asyncTest("should skip non-png iamges", function (assert) {
     expect(2);
 
     var fixture = getFixture();
@@ -76,7 +76,7 @@
     }, 42);
   });
 
-  QUnit.asyncTest("it should fix images with url seems to point a png image", function (assert) {
+  QUnit.asyncTest("should fix images with url seems to point a png image", function (assert) {
     expect(2);
 
     var fixture = getFixture();
@@ -92,7 +92,7 @@
   });
 
   /*
-  QUnit.asyncTest("it should fix only the elements with explicit opacity", function (assert) {
+  QUnit.asyncTest("should fix only the elements with explicit opacity", function (assert) {
     expect(2);
 
     var fixture = getFixture(),
@@ -110,7 +110,7 @@
   });
   */
 
-  QUnit.asyncTest("it copies some attributes to replacing elements", function (assert) {
+  QUnit.asyncTest("copies some attributes to replacing elements", function (assert) {
     expect(4);
 
     var fixture = getFixture(),
@@ -130,4 +130,5 @@
       QUnit.start();
     }, 42);
   });
+
 })();
