@@ -161,4 +161,16 @@
       QUnit.start();
     });
   });
+
+  QUnit.asyncTest("should not replace broken images", function (assert) {
+    expect(1);
+
+    var fixture = getFixture(),
+        imageEls = prepareImages(["test-broken.png"]);
+
+    ie8png(imageEls[0], function () {
+      assert.strictEqual(fixture.childNodes[0].tagName, "IMG", "should not replace broken image");
+      QUnit.start();
+    });
+  });
 })();

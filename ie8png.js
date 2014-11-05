@@ -43,6 +43,10 @@
     return "complete" in el ? el.complete : el.readyState === 4;
   }
 
+  function broken(el) {
+    return el.naturalWidth === 0;
+  }
+
   function copyAttributes(src, dest) {
     function copy(attr) {
       dest.setAttribute(attr, src.getAttribute(attr));
@@ -63,10 +67,11 @@
       return;
     }
 
-    var canvas = createCanvas(el);
-    copyAttributes(el, canvas);
-
-    el.parentNode.replaceChild(canvas, el);
+    if (!broken(el)) {
+      var canvas = createCanvas(el);
+      copyAttributes(el, canvas);
+      el.parentNode.replaceChild(canvas, el);
+    }
 
     onFinished();
   }
