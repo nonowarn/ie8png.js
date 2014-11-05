@@ -7,21 +7,19 @@
 
   <body>
     <h1>
-      <img src="./ie8pngjs.png" id="ie8png" alt="ie8png.js" style="opacity: 1; filter: alpha(opacity=100)">
-      <img src="./ie8pngjs.png" id="ie8png" alt="ie8png.js">
+      <img data-ie8 src="./ie8pngjs.png" id="ie8png" alt="ie8png.js">
+      <img src="./ie8pngjs.png" alt="ie8png.js">
     </h1>
     <img src="./browsers.png">
-    <img src="./browsers.png" id="browsers" style="opacity: 0.5; filter: alpha(opacity=50)">
+    <img data-ie8 src="./browsers.png" style="opacity: 0.5;">
 
-    <a href="https://github.com/you">
-      <img id="forkme" style="position: absolute; top: 0; right: 0; border: 0;" src="./forkme.png" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
+    <a href="https://github.com/nonowarn/ie8png.js">
+      <img data-ie8 style="position: absolute; top: 0; right: 0; border: 0;" src="./forkme.png" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
     </a>
 
     <script src="../ie8png.js"></script>
     <script>
-      ie8png(document.getElementById("ie8png"));
-      ie8png(document.getElementById("browsers"));
-      ie8png(document.getElementById("forkme"));
+      ie8png(document.querySelectorAll("[data-ie8]"));
     </script>
   </body>
 </html>
