@@ -61,25 +61,28 @@
   }
 
   function doFix(el, onFinished) {
-    // TODO: Handle load event and cache
-    if (!loaded(el)) {
-      setTimeout(function () { doFix(el, onFinished); }, 20);
-      return;
-    }
+    var proxy = new Image;
 
-    if (!broken(el)) {
+    proxy.onload = function () {
       var canvas = createCanvas(el);
       copyAttributes(el, canvas);
       el.parentNode.replaceChild(canvas, el);
-    }
+      onFinished();
+    };
 
-    onFinished();
+    proxy.onerror = function () {
+      // TODO: Reporting error or throwing exception?
+      onFinished();
+    };
+
+    proxy.src = el.src;
   }
 
   function shouldFix(el) {
-    var source = el.src || "";
+    var source = el.src || "",
+        origin = location.protocol + "//" + location.host;
     return el.tagName === "IMG" &&
-      source.indexOf(location.origin) === 0 &&
+      source.indexOf(origin) === 0 &&
       /\.png/i.test(source);
   }
 
