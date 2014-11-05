@@ -2,6 +2,12 @@
 
 Fixes rendering of PNG images with transparency on modern-browsers. Works on latest Chrome, Firefox, Safari and IE9+.
 
+## Install
+
+```
+bower install [--save] ie8png.js
+```
+
 ## Usage
 
 ```
