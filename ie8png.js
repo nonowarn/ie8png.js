@@ -39,10 +39,6 @@
     return canvas;
   }
 
-  function getOpacity(el) {
-    return Number(win.getComputedStyle(el).getPropertyValue("opacity"));
-  }
-
   function loaded(el) {
     return "complete" in el ? el.complete : el.readyState === 4;
   }

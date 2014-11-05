@@ -11,6 +11,7 @@
     for(i = 0, l = sources.length; i < l; ++i) {
       img = document.createElement("img");
       img.setAttribute("src", sources[i]);
+      //img.setAttribute("style", "opacity: 1");
       imgs.push(img);
       fixture.appendChild(img);
     }
@@ -89,4 +90,23 @@
       QUnit.start();
     }, 42);
   });
+
+  /*
+  QUnit.asyncTest("it should fix only the elements with explicit opacity", function (assert) {
+    expect(2);
+
+    var fixture = getFixture(),
+        imageEls = prepareImages(["test.png", "test.png"]);
+
+    imageEls[1].removeAttribute("style");
+
+    ie8png(fixture.querySelectorAll("img"));
+
+    setTimeout(function () {
+      assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "replaces png image");
+      assert.strictEqual(fixture.childNodes[1].tagName, "IMG",    "replaces png without explicit opacity");
+      QUnit.start();
+    }, 42);
+  });
+  */
 })();
