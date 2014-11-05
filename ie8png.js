@@ -72,6 +72,10 @@
     el.parentNode.replaceChild(canvas, el);
   }
 
+  function shouldFix(el) {
+    return /\.png/i.test(el.src);
+  }
+
   function ie8png(els) {
     // IE8 or below don't need this
     if (/; MSIE (?!9|\d{2,})/.test(navigator.userAgent)) {
@@ -83,7 +87,9 @@
     els = toArray(els);
 
     for (i = 0, l = els.length; i < l; ++i) {
-      doFix(els[i]);
+      if (shouldFix(els[i])) {
+        doFix(els[i]);
+      }
     }
   }
 

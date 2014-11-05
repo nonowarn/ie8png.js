@@ -59,4 +59,34 @@
       QUnit.start();
     }, 42);
   });
+
+  QUnit.asyncTest("it should skip non-png iamges", function (assert) {
+    expect(2);
+
+    var fixture = getFixture();
+    prepareImages(["test.png", "test.jpg"]);
+
+    ie8png(fixture.querySelectorAll("img"));
+
+    setTimeout(function () {
+      assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "replaces png image");
+      assert.strictEqual(fixture.childNodes[1].tagName, "IMG", "skip jpg image");
+      QUnit.start();
+    }, 42);
+  });
+
+  QUnit.asyncTest("it should fix images with url seems to point a png image", function (assert) {
+    expect(2);
+
+    var fixture = getFixture();
+    prepareImages(["test.png?1234", "test2.PNG"]);
+
+    ie8png(fixture.querySelectorAll("img"));
+
+    setTimeout(function () {
+      assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "replaces png image with query string");
+      assert.strictEqual(fixture.childNodes[1].tagName, "CANVAS", "replaces upper-cased extentions");
+      QUnit.start();
+    }, 42);
+  });
 })();
