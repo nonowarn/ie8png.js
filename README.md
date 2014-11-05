@@ -1,9 +1,10 @@
 # ie8png.js
 
+![ie8png.js](./ie8png-logo.png) 
+
+Fixes rendering of PNG images with transparency on modern-browsers. Works on latest Chrome, Firefox, Safari and IE9+.
+
 ## TODO
 
 * Precise rendering
-* Stable API
-* Error handling
-    - Passed non-<img> elements
-    - Prevent TypeError on value such as null or undefined
+* Error handling on broken images
