@@ -137,4 +137,28 @@
       QUnit.start();
     });
   });
+
+  QUnit.asyncTest("should load images in the document's origin", function (assert) {
+    expect(1);
+
+    var fixture = getFixture(),
+        imageEls = prepareImages([location.origin+"/tests/test.png"]);
+
+    ie8png(imageEls[0], function () {
+      assert.strictEqual(fixture.childNodes[0].tagName, "CANVAS", "should replace <img> with explicit orign of the document");
+      QUnit.start();
+    });
+  });
+
+  QUnit.asyncTest("should not replace images in the external origin", function (assert) {
+    expect(1);
+
+    var fixture = getFixture(),
+        imageEls = prepareImages(["http://example.com/tests/test.png"]);
+
+    ie8png(imageEls[0], function () {
+      assert.strictEqual(fixture.childNodes[0].tagName, "IMG", "should not replace <img> with external orign from the document");
+      QUnit.start();
+    });
+  });
 })();

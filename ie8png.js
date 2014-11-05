@@ -72,7 +72,10 @@
   }
 
   function shouldFix(el) {
-    return /\.png/i.test(el.src);
+    var source = el.src || "";
+    return el.tagName === "IMG" &&
+      source.indexOf(location.origin) === 0 &&
+      /\.png/i.test(source);
   }
 
   function nop() {}
