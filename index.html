@@ -6,10 +6,10 @@
     <title>ie8png.js</title>
     <style>
       * {
-        font-family: monospace;
+        font-family: Menlo, Osaka, monospace;
       }
 
-      h1, .compare {
+      h1, .compare, .controls {
         text-align: center;
       }
 
@@ -17,6 +17,37 @@
         white-space: nowrap;
         overflow: auto;
       }
+
+      h1 {
+        margin-bottom: 0;
+      }
+
+      .controls {
+        margin-bottom: 3em;
+      }
+
+      .controls button {
+        font-family: MS PGothic, Helvetica Neue, Arial, sans-serif;
+        font-size: 1em;
+        width: 15em;
+        text-align: center;
+
+        background: linear-gradient(to bottom,
+          rgba(235,235,235,1) 0%,
+          rgba(228,228,228,1) 50%,
+          rgba(211,211,211,1) 51%,
+          rgba(194,194,194,1) 100%);
+
+        border-style: none;
+        border-radius: 3px;
+        box-shadow:
+          0 0 0 1px rgb(244,244,244),
+          0 0 0 2px rgb(93,93,93);
+
+        -webkit-transform: scaleX(0.95);
+                transform: scaleX(0.95);
+      }
+
     </style>
   </head>
   <body>
@@ -24,6 +55,12 @@
     <h1>
       <a href="//github.com/nonowarn/ie8png.js"><img data-ie8 src="./images/ie8pngjs.png"></a>
     </h1>
+
+    <div class="controls">
+      <button id="fix" onclick="fix()">Fix these images</button>
+      <div id="stat">
+      </div>
+    </div>
 
     <div class="compare">
       <img src="./images/google.png">
@@ -78,14 +115,12 @@
     <!-- Fork me Badge -->
     <a href="https://github.com/nonowarn/ie8png.js"><img data-ie8 style="position: absolute; top: 0; right: 0; border: 0;" src="./images/forkme.png" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
 
-    <div id="stat">
-    </div>
-
     <script src="./ie8png.js"></script>
     <script class="example">
-      (function () {
+      function fix() {
         var startTime = +new Date(),
-            toProcess = document.querySelectorAll("[data-ie8]");
+            toProcess = document.querySelectorAll("[data-ie8]"),
+            fixButton = document.getElementById("fix");
         ie8png(toProcess, function () {
            var endTime = +new Date(),
                ellapsed = endTime - startTime,
@@ -93,10 +128,11 @@
                                    return pixels + (image.width * image.height);
                                  }, 0);
 
-           document.getElementById("stat").innerText =
+           document.getElementById("stat").textContent =
              processedPixels + " pixels processed in " + ellapsed + "ms (" + (processedPixels / ellapsed).toFixed(2) + "px/ms)";
+           fixButton.disabled = true;
         });
-      })();
+      }
     </script>
 
     <script type="text/javascript">
